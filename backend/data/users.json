@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "name": "HDDP Admin",
+    "email": "admin@hddpconsultants.com",
+    "passwordHash": "$2a$10$CpmUXR7pDIpvqzhckC2uT.sAOQm0mcn44b.xHN5L6Jf9iWisq5Klu",
+    "role": "admin",
+    "createdAt": "2026-07-10T12:22:18.813Z"
+  }
+]

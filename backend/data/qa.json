@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "question": "What does HDDP stand for?",
+    "answer": "HDDP stands for Hiring, Development & Deployment Process. We are consultants who manage the full talent lifecycle — from finding the right people to developing and deploying them successfully.",
+    "category": "About Us",
+    "published": true,
+    "order": 1
+  },
+  {
+    "id": 2,
+    "question": "What services does HDDP Consultants offer?",
+    "answer": "We offer four core solutions: Recruitment & Placement Services, Organizational Restructuring, Corporate Training Solutions, and HR Managed Services (including payroll, RPO, performance management, employee engagement, and HR technology integration).",
+    "category": "Services",
+    "published": true,
+    "order": 2
+  },
+  {
+    "id": 3,
+    "question": "Which industries do you serve?",
+    "answer": "Our expertise spans Healthcare, Information Technology, Banking & Financial Services, Consumer Goods & Retail, Travel & Transportation, and many other sectors.",
+    "category": "Industries",
+    "published": true,
+    "order": 3
+  },
+  {
+    "id": 4,
+    "question": "How long has HDDP been in business?",
+    "answer": "For over 25 years, our team has been at the forefront of connecting talent, strategy, and business insight to deliver transformative workforce solutions.",
+    "category": "About Us",
+    "published": true,
+    "order": 4
+  },
+  {
+    "id": 5,
+    "question": "What is your recruitment process?",
+    "answer": "Our process has four stages: 1) Talent Sourcing through our global network, 2) Screening & Assessment including technical, behavioral and background checks, 3) Selection & Placement with interview coordination and onboarding, and 4) Ongoing Partnership with regular follow-ups after placement.",
+    "category": "Process",
+    "published": true,
+    "order": 5
+  },
+  {
+    "id": 6,
+    "question": "Do you offer remote and hybrid staffing?",
+    "answer": "Yes. We provide Permanent Recruitment, Contract & Project-Based Staffing, Remote & Hybrid Staffing, Executive Search, and Managed Services — for on-site, remote, or hybrid work models.",
+    "category": "Services",
+    "published": true,
+    "order": 6
+  },
+  {
+    "id": 7,
+    "question": "How can I apply for a job through HDDP?",
+    "answer": "Visit our Careers / Apply Now page and submit your details and resume. Our recruiters will match your profile with open roles across our client network.",
+    "category": "Careers",
+    "published": true,
+    "order": 7
+  },
+  {
+    "id": 8,
+    "question": "How do I contact HDDP Consultants?",
+    "answer": "You can reach us at +1 (480) 712-2224, visit us at 808 N, 4th Ave, Unit 17, Phoenix, AZ 85003, or use the Get in Touch form on our website.",
+    "category": "Contact",
+    "published": true,
+    "order": 8
+  }
+]

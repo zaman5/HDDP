@@ -1,0 +1,79 @@
+/* ============ HDDP Consultants — Global Design System ============ */
+:root {
+  --navy: #0e2a47;
+  --navy-deep: #081b30;
+  --amber: #e8891d;
+  --amber-soft: #fdf3e5;
+  --ink: #1c2733;
+  --slate: #5a6b7d;
+  --line: #e3e9f0;
+  --bg: #f6f8fb;
+  --white: #ffffff;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(14, 42, 71, .10);
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font-body); color: var(--ink); background: var(--white); line-height: 1.65; }
+img { max-width: 100%; display: block; }
+a { color: var(--navy); }
+h1,h2,h3,h4 { font-family: var(--font-display); color: var(--navy); line-height: 1.2; }
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+.section { padding: 72px 0; }
+.section.alt { background: var(--bg); }
+
+.eyebrow { font-family: var(--font-display); font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--amber); font-weight: 700; margin-bottom: 10px; }
+.section-title { font-size: clamp(1.6rem, 3.2vw, 2.3rem); margin: 0 0 12px; }
+.section-lead { color: var(--slate); max-width: 720px; margin: 0 auto 40px; }
+.center { text-align: center; }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 600; font-size: .95rem; padding: 13px 26px; border-radius: 999px; border: 2px solid transparent; cursor: pointer; text-decoration: none; transition: .2s; }
+.btn-primary { background: var(--amber); color: #fff; }
+.btn-primary:hover { background: #cf7710; transform: translateY(-2px); }
+.btn-outline { border-color: var(--navy); color: var(--navy); background: transparent; }
+.btn-outline:hover { background: var(--navy); color: #fff; }
+.btn-light { background: #fff; color: var(--navy); }
+.btn-light:hover { background: var(--amber); color: #fff; }
+
+.grid { display: grid; gap: 26px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 960px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+.card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; transition: .25s; }
+.card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: transparent; }
+
+/* Page hero banner used across inner pages — background photo + overlay copied from the original hddpconsultants.com hero (hero-skyscraper.jpg, #084a79 @ 60% opacity) */
+.page-hero { background: linear-gradient(rgba(8,74,121,.6), rgba(8,74,121,.6)), url('/assets/img/hero-skyscraper.jpg') center/cover no-repeat; color: #fff; padding: 84px 0 64px; position: relative; overflow: hidden; }
+.page-hero::after { content: ''; position: absolute; right: -120px; top: -120px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(232,137,29,.35), transparent 65%); }
+.page-hero h1 { color: #fff; font-size: clamp(1.9rem, 4vw, 2.8rem); margin: 0 0 10px; }
+.page-hero p { color: #c8d6e6; max-width: 680px; margin: 0; font-size: 1.05rem; }
+.page-hero .eyebrow { color: var(--amber); }
+
+.prose p { color: var(--ink); }
+.prose h2, .prose h3 { margin-top: 1.6em; }
+.prose ul li { margin: 6px 0; }
+.prose img { border-radius: var(--radius); margin: 18px 0; }
+
+/* Forms */
+.field { margin-bottom: 16px; }
+.field label { display: block; font-weight: 600; font-size: .88rem; margin-bottom: 6px; color: var(--navy); }
+.field input, .field textarea, .field select { width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px; font: inherit; background: #fff; }
+.field input:focus, .field textarea:focus, .field select:focus { outline: 2px solid var(--amber); border-color: var(--amber); }
+.alert { padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; font-size: .92rem; }
+.alert.ok { background: #e7f6ec; color: #146c2e; }
+.alert.err { background: #fdecec; color: #a12622; }
+
+/* Utility */
+.tag { display: inline-block; background: var(--amber-soft); color: #a05f0e; font-size: .75rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; }
+.muted { color: var(--slate); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}

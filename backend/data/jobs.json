@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "Registered Nurse",
+    "department": "Healthcare",
+    "location": "Phoenix, AZ",
+    "type": "Full-time",
+    "description": "Provide direct patient care in a fast-paced clinical environment for one of our healthcare clients. Active RN license required.",
+    "open": true,
+    "postedAt": "2025-07-01T09:00:00.000Z",
+    "updatedAt": "2025-07-01T09:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "title": "Software Engineer",
+    "department": "Information Technology",
+    "location": "Remote",
+    "type": "Full-time",
+    "description": "Build and maintain web applications for our IT clients. Experience with JavaScript/TypeScript and REST APIs preferred.",
+    "open": true,
+    "postedAt": "2025-07-03T09:00:00.000Z",
+    "updatedAt": "2025-07-03T09:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "HR Business Partner",
+    "department": "HR Managed Services",
+    "location": "Phoenix, AZ",
+    "type": "Contract",
+    "description": "Support HR operations, employee relations, and performance management programs for client organizations.",
+    "open": true,
+    "postedAt": "2025-07-05T09:00:00.000Z",
+    "updatedAt": "2025-07-05T09:00:00.000Z"
+  }
+]
