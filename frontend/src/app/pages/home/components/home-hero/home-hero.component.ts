@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit, NgZone, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HERO_SLIDES } from '../../../../services/site-content';
 
@@ -39,9 +39,18 @@ export class HomeHeroComponent implements OnInit, OnDestroy {
   slides = HERO_SLIDES;
   slide = 0;
   private timer: any;
+  private zone = inject(NgZone);
+  private platformId = inject(PLATFORM_ID);
 
   ngOnInit() {
-    this.timer = setInterval(() => this.slide = (this.slide + 1) % this.slides.length, 4500);
+    // Browser-only, outside the zone: a recurring interval inside the zone
+    // keeps the app "unstable" and hangs SSR prerendering indefinitely.
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.zone.runOutsideAngular(() => {
+      this.timer = setInterval(() => {
+        this.zone.run(() => this.slide = (this.slide + 1) % this.slides.length);
+      }, 4500);
+    });
   }
   ngOnDestroy() { clearInterval(this.timer); }
 }
