@@ -24,7 +24,7 @@ import { HERO_SLIDES } from '../../../../services/site-content';
   </section>
   `,
   styles: [`
-    .hero { background: linear-gradient(120deg, var(--navy-deep) 0%, var(--navy) 55%, #16406b 100%); color: #fff; padding: 110px 0 90px; position: relative; overflow: hidden; }
+    .hero { background: linear-gradient(rgba(8,42,79,.45), rgba(8,42,79,.45)), url('/assets/img/home-hero-bg.jpg') center/cover no-repeat; color: #fff; padding: 110px 0 90px; position: relative; overflow: hidden; }
     .hero::before { content: 'HDDP'; position: absolute; right: -40px; bottom: -60px; font-family: var(--font-display); font-size: 16rem; font-weight: 800; color: rgba(255,255,255,.04); letter-spacing: -.04em; pointer-events: none; }
     .hero-inner { position: relative; max-width: 760px; }
     .hero h1 { color: #fff; font-size: clamp(2rem, 4.6vw, 3.2rem); margin: 0 0 18px; min-height: 2.4em; }
