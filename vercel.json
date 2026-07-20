@@ -2,12 +2,12 @@
   "version": 2,
   "builds": [
     { "src": "backend/api/index.js", "use": "@vercel/node" },
-    { "src": "frontend/dist/hddp-frontend/browser/**", "use": "@vercel/static" }
+    { "src": "frontend/package.json", "use": "@vercel/static-build", "config": { "distDir": "dist/hddp-frontend/browser" } }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "backend/api/index.js" },
-    { "src": "/(.*\\.[a-zA-Z0-9]+)$", "dest": "/frontend/dist/hddp-frontend/browser/$1" },
-    { "src": "/(who-we-are|recruitment-placement-services|organizational-restructuring|corporate-training-solutions|hr-managed-services|healthcare|information-technology|banking-financial-services|consumer-goods-retail|travel-transportation|industries-we-serve|how-we-work|get-in-touch|careers|apply-now|blogs|qa)/?", "dest": "/frontend/dist/hddp-frontend/browser/$1/index.html" },
-    { "src": "/(.*)", "dest": "/frontend/dist/hddp-frontend/browser/index.html" }
+    { "src": "/(.*\\.[a-zA-Z0-9]+)$", "dest": "/frontend/$1" },
+    { "src": "/(who-we-are|recruitment-placement-services|organizational-restructuring|corporate-training-solutions|hr-managed-services|healthcare|information-technology|banking-financial-services|consumer-goods-retail|travel-transportation|industries-we-serve|how-we-work|get-in-touch|careers|apply-now|blogs|qa)/?", "dest": "/frontend/$1/index.html" },
+    { "src": "/(.*)", "dest": "/frontend/index.html" }
   ]
 }
