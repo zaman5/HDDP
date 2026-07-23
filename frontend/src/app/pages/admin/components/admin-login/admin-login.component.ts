@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
   template: `
   <div class="login-wrap">
     <div class="login-card">
-      <a routerLink="/" class="brand"><img src="assets/img/logo.jpg" alt="HDDP Consultants" class="brand-logo"><span class="admin-badge">ADMIN</span></a>
+      <a routerLink="/" class="brand"><img src="assets/img/logo.png" alt="HDDP Consultants" class="brand-logo"><span class="admin-badge">ADMIN</span></a>
       <h1>Admin Panel Login</h1>
       <p class="muted">Control your website — blogs, Q&A, messages & applications.</p>
       <div class="alert err" *ngIf="error">{{ error }}</div>

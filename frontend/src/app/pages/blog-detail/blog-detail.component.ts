@@ -58,7 +58,7 @@ export class BlogDetailComponent implements OnInit {
       description: b.excerpt,
       image: b.coverImage ? `https://hddpconsultants.com/${b.coverImage}` : undefined,
       author: { '@type': 'Organization', name: b.author || 'HDDP Consultants' },
-      publisher: { '@type': 'Organization', name: 'HDDP Consultants', logo: { '@type': 'ImageObject', url: 'https://hddpconsultants.com/assets/img/logo.jpg' } },
+      publisher: { '@type': 'Organization', name: 'HDDP Consultants', logo: { '@type': 'ImageObject', url: 'https://hddpconsultants.com/assets/img/logo.png' } },
       datePublished: b.createdAt,
       dateModified: b.updatedAt || b.createdAt,
       mainEntityOfPage: `https://hddpconsultants.com/blogs/${slug}`

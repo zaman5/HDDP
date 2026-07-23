@@ -11,7 +11,7 @@ export type AdminTab = 'dashboard' | 'blogs' | 'qa' | 'jobs' | 'messages' | 'app
   template: `
   <aside class="side">
     <a routerLink="/" class="brand">
-      <span class="logo-box"><img src="assets/img/logo.jpg" alt="HDDP Consultants" class="brand-logo"></span>
+      <span class="logo-box"><img src="assets/img/logo.png" alt="HDDP Consultants" class="brand-logo"></span>
       <span class="admin-badge">ADMIN</span>
     </a>
     <nav>

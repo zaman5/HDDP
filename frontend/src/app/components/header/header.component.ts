@@ -30,7 +30,7 @@ import { SITE, SOLUTIONS, INDUSTRIES } from '../../services/site-content';
   <header class="header">
     <div class="container header-inner">
       <a routerLink="/" class="brand" (click)="open=false">
-        <img src="assets/img/logo.jpg" alt="HDDP Consultants" class="brand-logo">
+        <img src="assets/img/logo.png" alt="HDDP Consultants" class="brand-logo">
       </a>
       <button class="burger" (click)="open=!open" aria-label="Toggle menu">☰</button>
       <nav [class.open]="open">
