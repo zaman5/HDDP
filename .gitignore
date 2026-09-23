@@ -5,6 +5,10 @@ dist/
 *.log
 .env
 .env.*
+*.env
+backend/data/
+data/
 .DS_Store
 Thumbs.db
 .claude/
+

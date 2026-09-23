@@ -4,13 +4,22 @@
   "description": "HDDP Consultants - Node.js/Express backend (blogs, Q&A, chatbot, admin, contact, careers)",
   "main": "server.js",
   "scripts": {
+    "build": "node build.js",
     "start": "node server.js",
+    "start:dist": "node dist/server.js",
     "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.x",
+    "npm": ">=9.0.0"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
   }
 }

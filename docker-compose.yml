@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  hddp-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hddp-website
+    restart: always
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - JWT_SECRET=change-this-jwt-secret-in-production-12345
+      - ADMIN_EMAIL=admin@hddpconsultants.com
+      - ADMIN_PASSWORD=ChangeAdminPassword!123
+      - ADMIN_NAME="HDDP Admin"
+      - ACCELEREC_JOBS_URL=https://portal.accelerec.com/api/v1/organization/jobs
+      - ACCELEREC_API_KEY=
+    volumes:
+      - hddp_data:/app/backend/data
+
+volumes:
+  hddp_data:

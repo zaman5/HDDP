@@ -24,7 +24,8 @@
               "src/favicon.ico",
               "src/robots.txt",
               "src/sitemap.xml",
-              "src/llms.txt"
+              "src/llms.txt",
+              "src/.htaccess"
             ],
             "styles": [
               "src/styles.css"
