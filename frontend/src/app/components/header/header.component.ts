@@ -73,10 +73,10 @@ import { SITE, SOLUTIONS, INDUSTRIES } from '../../services/site-content';
         </div>
 
         <a routerLink="/how-we-work" routerLinkActive="active" (click)="closeMenu()">HOW WE WORK</a>
+        <a routerLink="/careers" routerLinkActive="active" (click)="closeMenu()">CAREERS</a>
         <a routerLink="/blogs" routerLinkActive="active" (click)="closeMenu()">BLOGS</a>
         <a routerLink="/qa" routerLinkActive="active" (click)="closeMenu()">Q&amp;A</a>
         <a routerLink="/get-in-touch" routerLinkActive="active" (click)="closeMenu()">CONTACT US</a>
-        <a routerLink="/apply-now" class="btn btn-primary apply" (click)="closeMenu()">Apply Now</a>
       </nav>
     </div>
   </header>

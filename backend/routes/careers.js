@@ -37,37 +37,91 @@ const appStatusSchema = {
   status: { type: 'string', required: true, enum: ['new', 'shortlisted', 'interview', 'hired', 'rejected'] }
 };
 
+const fs = require('fs');
+const path = require('path');
+const CACHE_FILE = path.join(__dirname, '../data/jobs_cache.json');
+
 // Public: live job openings, proxied from the Accelerec careers portal
 let liveJobsCache = { data: null, ts: 0 };
 const LIVE_JOBS_TTL = 60 * 1000;
 
-router.get('/live-jobs', publicLimiter, async (req, res) => {
+try {
+  if (fs.existsSync(CACHE_FILE)) {
+    liveJobsCache.data = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+    liveJobsCache.ts = Date.now();
+  }
+} catch (e) {}
+
+async function fetchAccelerecJobs() {
   if (liveJobsCache.data && Date.now() - liveJobsCache.ts < LIVE_JOBS_TTL) {
-    return res.json(liveJobsCache.data);
+    return liveJobsCache.data;
   }
-  if (!ACCELEREC_API_KEY) {
-    return res.json([]);
+  const key = ACCELEREC_API_KEY;
+  if (!key || key === 'SECRET_API_KEY' || key === 'YOUR_API_KEY') {
+    return liveJobsCache.data || null;
   }
+  const url = ACCELEREC_JOBS_URL || 'https://portal.accelerec.com/api/v1/organization/jobs';
   try {
-    const r = await fetch(ACCELEREC_JOBS_URL, { headers: { 'x-api-key': ACCELEREC_API_KEY } });
+    const r = await fetch(url, { headers: { 'x-api-key': key } });
     const body = await r.json();
     if (!r.ok || !body.success) {
-      console.error('[Accelerec API Error]', body?.message || r.statusText);
-      return res.status(502).json({ error: 'Could not load live job openings at this time.' });
+      throw new Error(body?.message || `Accelerec HTTP ${r.status}`);
     }
     liveJobsCache = { data: body.data, ts: Date.now() };
-    res.json(body.data);
+    try {
+      fs.writeFileSync(CACHE_FILE, JSON.stringify(body.data, null, 2));
+    } catch (e) {}
+    return body.data;
   } catch (err) {
-    console.error('[Careers Provider Error]', err);
-    res.status(502).json({ error: 'Could not reach careers provider at this time.' });
+    if (liveJobsCache.data) {
+      console.warn('[Accelerec API Warning] Using cached jobs due to fetch failure:', err.message);
+      return liveJobsCache.data;
+    }
+    throw err;
+  }
+}
+
+router.get('/live-jobs', publicLimiter, async (req, res) => {
+  const key = ACCELEREC_API_KEY;
+  const isKeyPending = !key || key === 'SECRET_API_KEY' || key === 'YOUR_API_KEY';
+  if (isKeyPending) {
+    return res.json({
+      success: true,
+      pendingKey: true,
+      message: 'Contact support to get your API key and enable API access. Please use the embedded iFrame option.',
+      data: []
+    });
+  }
+  try {
+    const data = await fetchAccelerecJobs();
+    res.json(data);
+  } catch (err) {
+    console.error('[Accelerec API Error]', err.message);
+    if (liveJobsCache.data) {
+      return res.json(liveJobsCache.data);
+    }
+    res.status(502).json({ error: 'Could not load live job openings from Accelerec at this time.' });
   }
 });
 
-// Public: list open jobs (or all, for admin, with ?all=1)
-router.get('/jobs', publicLimiter, (req, res) => {
+// Public: list open jobs (returns Accelerec live jobs by default, or internal fallback)
+router.get('/jobs', publicLimiter, async (req, res) => {
+  if (req.query.internal === '1' || req.query.all === '1') {
+    const all = read('jobs');
+    const items = (req.query.all === '1' ? all : all.filter(j => j.open))
+      .sort((a, b) => new Date(b.postedAt) - new Date(a.postedAt));
+    return res.json(items);
+  }
+  try {
+    const live = await fetchAccelerecJobs();
+    if (live && live.length) {
+      return res.json(live);
+    }
+  } catch (err) {
+    console.error('[Jobs Endpoint Error]', err.message);
+  }
   const all = read('jobs');
-  const items = (req.query.all === '1' ? all : all.filter(j => j.open))
-    .sort((a, b) => new Date(b.postedAt) - new Date(a.postedAt));
+  const items = all.filter(j => j.open).sort((a, b) => new Date(b.postedAt) - new Date(a.postedAt));
   res.json(items);
 });
 
@@ -156,5 +210,14 @@ router.delete('/:id', requireAuth, authenticatedLimiter, validateParams(idParamS
   write('applications', read('applications').filter(a => a.id !== Number(req.params.id)));
   res.json({ ok: true });
 });
+
+router.getLiveJobsCount = async () => {
+  try {
+    const list = await fetchAccelerecJobs();
+    return Array.isArray(list) ? list.length : 0;
+  } catch (e) {
+    return liveJobsCache.data?.length || 0;
+  }
+};
 
 module.exports = router;

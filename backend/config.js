@@ -10,6 +10,7 @@ module.exports = {
   ACCELEREC_JOBS_URL: process.env.ACCELEREC_JOBS_URL || 'https://portal.accelerec.com/api/v1/organization/jobs',
   ACCELEREC_API_KEY: process.env.ACCELEREC_API_KEY || '',
 
+
   // ===== Configurable Rate Limiting Thresholds =====
   RATE_LIMITS: {
     // 1. Authentication Tier (Login, Change-Password)

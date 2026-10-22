@@ -12,9 +12,28 @@ export interface Job {
   description: string; open: boolean; postedAt: string; updatedAt: string;
 }
 export interface LiveJob {
-  uuid: string; jobTitle: string; location: string; city: string[]; jobType: string; jobNature: string;
-  closingDate: string | null; salary: string; currency: string; rate: string; industryType: string;
-  detailedJobDescription: string; jobLink: string; uniqueCustomId: string;
+  uuid: string;
+  jobTitle: string;
+  location: string;
+  city: string[];
+  jobType: string;
+  jobNature: string;
+  closingDate: string | null;
+  salary: string;
+  currency: string;
+  rate: string;
+  industryType?: string;
+  detailedJobDescription: string;
+  jobLink: string;
+  uniqueCustomId?: string;
+  experience?: string;
+  toolsHandlingExperience?: string[];
+  qualification?: string;
+  degreeName?: string[];
+  certification?: string;
+  benefits?: string[];
+  language?: string[];
+  organizationID?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -49,6 +68,11 @@ export class ApiService {
   createJob(j: Partial<Job>) { return this.http.post<Job>('/api/careers/jobs', j); }
   updateJob(id: number, j: Partial<Job>) { return this.http.put<Job>(`/api/careers/jobs/${id}`, j); }
   deleteJob(id: number) { return this.http.delete(`/api/careers/jobs/${id}`); }
+
+  // Candidate Application
+  submitApplication(data: { name: string; email: string; phone?: string; position?: string; linkedin?: string; coverNote?: string }): Observable<any> {
+    return this.http.post('/api/careers/apply', data);
+  }
 
   // Live job openings (Accelerec careers portal)
   getLiveJobs(): Observable<LiveJob[]> { return this.http.get<LiveJob[]>('/api/careers/live-jobs'); }

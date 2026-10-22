@@ -4,14 +4,14 @@ export const SITE = {
   name: 'HDDP Consultants',
   tagline: 'Hiring, Development & Deployment Process Consultants',
   phone: '+1 (480) 712-2224',
-  email: 'info@hddpconsultants.com',
+  email: 'info@hddpconsultants.pk',
   address: '808 N, 4th Ave, Unit 17, Phoenix, AZ, 85003',
   social: {
     linkedin: 'https://www.linkedin.com/company/hddp-consultants/',
     facebook: 'https://www.facebook.com/profile.php?id=100064057897045/',
     instagram: 'https://www.instagram.com/hddp_consultants/'
   },
-  careersPortal: 'https://careers.accelerec.com/career/HDDP-Consultants'
+  careersPortal: 'https://jobs.accelerec.com'
 };
 
 export const HERO_SLIDES = [

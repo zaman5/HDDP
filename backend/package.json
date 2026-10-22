@@ -10,7 +10,7 @@
     "dev": "node --watch server.js"
   },
   "engines": {
-    "node": ">=18.0.0 <=20.x",
+    "node": "20.x",
     "npm": ">=9.0.0"
   },
   "dependencies": {

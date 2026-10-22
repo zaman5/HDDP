@@ -13,7 +13,6 @@ import { SITE } from '../../services/site-content';
       <div class="footer-col">
         <h4>Connect With Us:</h4>
         <p class="about-text">For over 25 years, we have been at the forefront of connecting talent, strategy, and business insight to deliver transformative workforce solutions.</p>
-        <a routerLink="/apply-now" class="btn btn-primary" style="margin-top: 14px; margin-bottom: 20px;">Apply Now!</a>
         <div class="socials">
           <a [href]="site.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
           <a [href]="site.social.facebook" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
@@ -30,8 +29,7 @@ import { SITE } from '../../services/site-content';
           <li><a routerLink="/healthcare">Healthcare Staffing</a></li>
           <li><a routerLink="/information-technology">IT Staffing</a></li>
           <li><a routerLink="/blogs">Blogs &amp; News</a></li>
-          <li><a routerLink="/qa">Q&amp;A Help Center</a></li>
-          <li><a [href]="site.careersPortal" target="_blank" rel="noopener">Careers Portal ↗</a></li>
+          <li><a routerLink="/careers">Careers &amp; Job Openings</a></li>
         </ul>
       </div>
 

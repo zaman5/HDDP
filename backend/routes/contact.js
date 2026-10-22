@@ -13,7 +13,13 @@ const contactSchema = {
 };
 
 // POST /api/contact — public contact form (interactive limiter + strict schema)
-router.post('/', interactiveLimiter, validateBody(contactSchema), (req, res) => {
+router.post('/', (req, res, next) => {
+  if (req.body && !req.body.name && req.body.fullName) {
+    req.body.name = req.body.fullName;
+    delete req.body.fullName;
+  }
+  next();
+}, interactiveLimiter, validateBody(contactSchema), (req, res) => {
   const { name, email, phone = '', subject = '', message } = req.body;
   const messages = read('messages');
   const item = {

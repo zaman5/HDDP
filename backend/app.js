@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const seed = require('./seed');
 const { requireAuth } = require('./middleware/auth');
 const { read } = require('./db');
@@ -32,21 +33,27 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/chatbot', interactiveLimiter, require('./routes/chatbot'));
 app.use('/api/contact', require('./routes/contact')); // contact router handles POST (interactive) & GET/PUT/DELETE (admin)
 
-// 3. General public & content endpoints (Blogs, QA, Careers)
+const careersRouter = require('./routes/careers');
 app.use('/api/blogs', require('./routes/blogs'));
 app.use('/api/qa', require('./routes/qa'));
-app.use('/api/careers', require('./routes/careers'));
+app.use('/api/careers', careersRouter);
 
 // 4. Admin routes: chatbot logs + dashboard stats (with looser authenticated rate limits)
 app.get('/api/admin/chatlogs', requireAuth, authenticatedLimiter, (req, res) => {
   res.json(read('chatlogs').slice(-200).reverse());
 });
 
-app.get('/api/admin/stats', requireAuth, authenticatedLimiter, (req, res) => {
+app.get('/api/admin/stats', requireAuth, authenticatedLimiter, async (req, res) => {
+  let liveJobsCount = 0;
+  try {
+    if (careersRouter && careersRouter.getLiveJobsCount) {
+      liveJobsCount = await careersRouter.getLiveJobsCount();
+    }
+  } catch (e) {}
   res.json({
     blogs: read('blogs').length,
     qa: read('qa').length,
-    jobs: read('jobs').filter(j => j.open).length,
+    jobs: liveJobsCount || read('jobs').filter(j => j.open).length,
     messages: read('messages').length,
     unreadMessages: read('messages').filter(m => !m.read).length,
     applications: read('applications').length,
@@ -68,7 +75,6 @@ app.get('/sitemap.xml', publicLimiter, (req, res) => {
     { url: '/how-we-work', priority: '0.8', changefreq: 'monthly' },
     { url: '/get-in-touch', priority: '0.8', changefreq: 'monthly' },
     { url: '/careers', priority: '0.9', changefreq: 'daily' },
-    { url: '/apply-now', priority: '0.9', changefreq: 'daily' },
     { url: '/qa', priority: '0.7', changefreq: 'weekly' },
     { url: '/recruitment-placement-services', priority: '0.9', changefreq: 'monthly' },
     { url: '/organizational-restructuring', priority: '0.9', changefreq: 'monthly' },
@@ -133,7 +139,15 @@ app.use((err, req, res, next) => {
 
 // Serve Angular build directly when running as a standalone Node server
 if (!process.env.VERCEL) {
-  const distDir = path.join(__dirname, '..', 'frontend', 'dist', 'hddp-frontend', 'browser');
+  const candidateDirs = [
+    path.join(__dirname, '..', 'frontend', 'dist', 'hddp-frontend', 'browser'),
+    path.join(__dirname, '..', '..', 'frontend', 'dist', 'hddp-frontend', 'browser'),
+    path.join(process.cwd(), 'frontend', 'dist', 'hddp-frontend', 'browser'),
+    // cPanel upload layout: <root>/Backend + <root>/Frontend/browser (Linux paths are case-sensitive)
+    path.join(__dirname, '..', 'Frontend', 'browser'),
+    path.join(__dirname, '..', 'frontend', 'browser')
+  ];
+  const distDir = candidateDirs.find(d => fs.existsSync(d)) || candidateDirs[0];
   app.use(express.static(distDir));
   app.get(/^(?!\/api).*/, (req, res, next) => {
     res.sendFile(path.join(distDir, 'index.html'), err => { if (err) next(); });

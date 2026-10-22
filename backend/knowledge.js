@@ -42,12 +42,12 @@ module.exports = [
     reply: "We provide: Permanent Recruitment, Contract & Project-Based Staffing, Remote & Hybrid Staffing, Executive Search for senior leadership, and end-to-end Managed Services. Flexible engagement models for on-site, remote, or hybrid teams."
   },
   {
-    keywords: ['job', 'career', 'apply', 'vacancy', 'work with you', 'resume', 'cv'],
-    reply: "Great! To apply, visit our Careers / Apply Now page and submit your details and resume. Our recruiters will match your profile with open roles across our client network. You can also apply through our careers portal."
+    keywords: ['job', 'career', 'apply', 'vacancy', 'work with you', 'resume', 'cv', 'opening', 'positions'],
+    reply: "Explore our live job openings on our Careers page (/careers) powered by Accelerec! You can view current roles across IT, Healthcare, Finance, and Operations and apply directly to each position."
   },
   {
     keywords: ['contact', 'phone', 'email', 'address', 'location', 'reach', 'office', 'call'],
-    reply: "You can reach HDDP Consultants at:\nPhone: +1 (480) 712-2224\nAddress: 808 N, 4th Ave, Unit 17, Phoenix, AZ 85003, USA\nOr use the Get in Touch form on our Contact page and our team will respond promptly."
+    reply: "You can reach HDDP Consultants at:\nEmail: info@hddpconsultants.pk\nPhone: +1 (480) 712-2224\nAddress: 808 N, 4th Ave, Unit 17, Phoenix, AZ 85003, USA\nOr use the Get in Touch form on our Contact page and our team will respond promptly."
   },
   {
     keywords: ['vision', 'mission', 'values'],

@@ -9,7 +9,7 @@
     { "src": "/(sitemap\\.xml|robots\\.txt|llms\\.txt|favicon\\.ico)", "dest": "/frontend/$1" },
     { "src": "/assets/(.*)", "dest": "/frontend/assets/$1" },
     { "src": "/(.*\\.[a-zA-Z0-9]+)$", "dest": "/frontend/$1" },
-    { "src": "/(who-we-are|recruitment-placement-services|organizational-restructuring|corporate-training-solutions|hr-managed-services|healthcare|information-technology|banking-financial-services|consumer-goods-retail|travel-transportation|industries-we-serve|how-we-work|get-in-touch|careers|apply-now|blogs|qa|admin)/?", "dest": "/frontend/$1/index.html" },
+    { "src": "/(who-we-are|recruitment-placement-services|organizational-restructuring|corporate-training-solutions|hr-managed-services|healthcare|information-technology|banking-financial-services|consumer-goods-retail|travel-transportation|industries-we-serve|how-we-work|get-in-touch|careers|blogs|qa|admin)/?", "dest": "/frontend/$1/index.html" },
     { "src": "/(.*)", "dest": "/frontend/index.html" }
   ]
 }

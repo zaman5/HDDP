@@ -13,6 +13,5 @@
 /how-we-work
 /get-in-touch
 /careers
-/apply-now
 /blogs
 /qa

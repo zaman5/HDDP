@@ -22,8 +22,9 @@ The project includes a ready-to-deploy [`vercel.json`](file:///c:/Users/zaman/Vi
    - `JWT_SECRET`: A long random secret string.
    - `ADMIN_EMAIL`: `admin@hddpconsultants.com` (or your preferred admin email).
    - `ADMIN_PASSWORD`: Your strong admin password.
-   - `ACCELEREC_API_KEY`: (Optional) Your Accelerec API key if connecting to live jobs.
+   - `ACCELEREC_API_KEY`: (Optional) Your Accelerec API key once received from Accelerec Support. In the meantime, the Careers page displays live positions seamlessly via the embedded Accelerec iFrame (`https://careers.accelerec.com/career/HDDP-Consultants`).
 4. Click **Deploy**.
+
 
 ---
 

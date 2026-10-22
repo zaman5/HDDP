@@ -44,7 +44,7 @@ import { PageQaComponent } from '../../components/page-qa/page-qa.component';
 
         <div class="actions-row">
           <a routerLink="/get-in-touch" class="btn btn-primary">Discuss your hiring needs</a>
-          <a routerLink="/apply-now" class="btn btn-outline">Apply as a candidate</a>
+          <a routerLink="/careers" class="btn btn-outline">Explore Career Openings</a>
         </div>
       </div>
     </section>

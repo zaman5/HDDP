@@ -9,7 +9,7 @@
     "serve:ssr:hddp-frontend": "node dist/hddp-frontend/server/server.mjs"
   },
   "engines": {
-    "node": ">=18.13.0 <=20.x",
+    "node": "20.x",
     "npm": ">=9.0.0"
   },
   "private": true,

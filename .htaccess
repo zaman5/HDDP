@@ -1,0 +1,75 @@
+# ==============================================================================
+# HDDP Consultants - Root Apache .htaccess Configuration
+# For deployment where root directory is pointed to Apache / cPanel public_html
+# ==============================================================================
+
+DirectoryIndex index.html index.php
+Options -Indexes -MultiViews
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. Forward /api requests to Node.js backend if using mod_proxy
+  <IfModule mod_proxy.c>
+    RewriteCond %{REQUEST_URI} ^/api/(.*)$ [NC]
+    RewriteRule ^api/(.*)$ http://127.0.0.1:4000/api/$1 [P,L]
+  </IfModule>
+
+  # 3. PHP Fallback for live jobs if Node.js reverse proxy is not running
+  RewriteRule ^api/careers/live-jobs/?$ frontend/dist/hddp-frontend/browser/jobs.php [L,QSA]
+
+  # 4. If request is already pointing to frontend/dist/, let it pass
+  RewriteRule ^frontend/dist/ - [L]
+
+  # 5. Check if file or directory exists in frontend/dist/hddp-frontend/browser/
+  RewriteCond %{DOCUMENT_ROOT}/frontend/dist/hddp-frontend/browser/$1 -f [OR]
+  RewriteCond %{DOCUMENT_ROOT}/frontend/dist/hddp-frontend/browser/$1 -d
+  RewriteRule ^(.*)$ frontend/dist/hddp-frontend/browser/$1 [L]
+
+  # 6. Fallback for SPA routes to frontend/dist/hddp-frontend/browser/index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ frontend/dist/hddp-frontend/browser/index.html [L]
+</IfModule>
+
+# Block Access to Hidden & Sensitive Files
+<IfModule mod_rewrite.c>
+  RewriteRule "(^|/)\.(?!well-known)" - [F]
+  <FilesMatch "(^\.env|package\.json|package-lock\.json|tsconfig\.json|angular\.json|\.md|\.log|\.bak|\.sql)$">
+    <IfModule mod_authz_core.c>
+      Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+      Order allow,deny
+      Deny from all
+    </IfModule>
+  </FilesMatch>
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+</IfModule>
+
+# MIME Types
+<IfModule mod_mime.c>
+  AddType application/javascript js mjs
+  AddType text/css css
+  AddType image/svg+xml svg svgz
+  AddType image/webp webp
+  AddType image/avif avif
+  AddType font/woff woff
+  AddType font/woff2 woff2
+  AddType application/json json
+  AddType application/xml xml
+</IfModule>
